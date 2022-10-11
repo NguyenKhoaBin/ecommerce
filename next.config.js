@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-}
+};
 
-module.exports = nextConfig
+// module.exports = nextConfig;
+module.exports = {
+  images: { domains: ["cdn-icons-png.flaticon.com", "cdn.sanity.io"] },
+};
