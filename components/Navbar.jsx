@@ -19,7 +19,7 @@ const Navbar = () => {
             className="text-[#908383] 
     text-xl hover:text-opacity-[.8]"
           >
-            BSHOP1
+            BSHOP
           </h2>
         </Link>
         <span className="h-[40px] w-[40px] flex items-center text-[#7b7474] cursor-pointer  hover:scale-110 relative ">
