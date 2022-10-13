@@ -30,7 +30,7 @@ const Checkout = ({ product, products }) => {
                 </p>
               </div>
               <div className="mt-6 sm:mt-0 xl:my-10 xl:px-20 w-52 sm:w-96 xl:w-auto">
-                <img src={urlFor(product?.image[0]).url()} alt="headphones" />
+                <img src={urlFor(product?.image[0])} alt="headphones" />
               </div>
             </div>
 
