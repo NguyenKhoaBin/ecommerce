@@ -8,7 +8,7 @@ const Checkout = ({ product }) => {
   const countries = ["Việt Nam", "Russia", "UK"];
   const [menu, setMenu] = useState(false);
   const [country, setCountry] = useState("United States");
-  console.log(urlFor(product?.image[0]).url());
+  console.log(urlFor(product?.image[0])?.url());
 
   const changeText = (e) => {
     setMenu(false);
@@ -43,6 +43,7 @@ const Checkout = ({ product }) => {
                 ></Image> */}
                 <Image
                   src={urlFor(product.image[0]).url()}
+                  // abc
                   width={500}
                   height={500}
                   alt="headphones"
