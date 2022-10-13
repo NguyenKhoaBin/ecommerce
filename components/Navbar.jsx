@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import CartIcon from "../components/icon/CartIcon";
+import { useStateContext } from "../context/StateContext";
 import Cart from "./Cart";
 
 const Navbar = () => {
@@ -8,6 +9,7 @@ const Navbar = () => {
     setShowCart(!showCart);
   };
   const [showCart, setShowCart] = useState(false);
+  const { totalPrice, totalQuantities } = useStateContext();
   return (
     <>
       <div
@@ -25,7 +27,7 @@ const Navbar = () => {
         <span className="h-[40px] w-[40px] flex items-center text-[#7b7474] cursor-pointer  hover:scale-110 relative ">
           <CartIcon onClick={handleClickOpenCart}></CartIcon>
           <span className="text-textColor absolute right-[0] flex items-center justify-center w-5 h-5 p-1 -translate-y-1/4 text-[14px] font-[500] -translate-x-1/5 bg-orange-400 rounded-full">
-            2
+            {totalQuantities}
           </span>
         </span>
       </div>

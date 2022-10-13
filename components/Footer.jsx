@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="my-5 h-full max-h[120px] flex items-center justify-evenly flex-col gap-3">
+    <div className="my-5 px-5 h-full max-h[120px] flex items-center justify-evenly flex-col gap-3">
       <h3 className="text-xl font-[500] text-center text-textColor">
         © 2022 Nguyen Khoa Bin All Rights Reserved
       </h3>
