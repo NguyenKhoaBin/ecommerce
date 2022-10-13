@@ -4,11 +4,11 @@ import React, { useState } from "react";
 import { useStateContext } from "../../context/StateContext";
 import { client, urlFor } from "../../libs/client";
 
-const Checkout = ({ product, products }) => {
+const Checkout = ({ product }) => {
   const countries = ["Việt Nam", "Russia", "UK"];
   const [menu, setMenu] = useState(false);
   const [country, setCountry] = useState("United States");
-  console.log(urlFor(product?.image[0])?.url());
+  console.log(product);
 
   const changeText = (e) => {
     setMenu(false);
@@ -32,7 +32,7 @@ const Checkout = ({ product, products }) => {
                 </p>
               </div>
               <div className="mt-6 sm:mt-0 xl:my-10 xl:px-20 w-52 sm:w-96 xl:w-auto">
-                <Image
+                {/* <Image
                   // src={urlFor(product?.image[0])?.url()}
                   src={
                     "https://cdn.sanity.io/images/sho4tsku/production/a64b345016e96adfb8849af5521c8e0ecfe8f027-555x555.webp"
@@ -40,7 +40,7 @@ const Checkout = ({ product, products }) => {
                   width={500}
                   height={500}
                   alt="headphones"
-                ></Image>
+                ></Image> */}
               </div>
             </div>
 
@@ -217,13 +217,11 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params: { checkout } }) => {
   const query = `*[_type == "product" && name == '${checkout[0]}'][0]`;
-  const productsQuery = '*[_type == "product"]';
 
   const product = await client.fetch(query);
-  const products = await client.fetch(productsQuery);
 
   return {
-    props: { products, product },
+    props: { product },
   };
 };
 
