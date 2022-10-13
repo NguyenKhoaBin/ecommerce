@@ -8,6 +8,7 @@ const Checkout = ({ product, products }) => {
   const countries = ["Việt Nam", "Russia", "UK"];
   const [menu, setMenu] = useState(false);
   const [country, setCountry] = useState("United States");
+  console.log(urlFor(product?.image[0])?.url());
 
   const changeText = (e) => {
     setMenu(false);
@@ -32,7 +33,10 @@ const Checkout = ({ product, products }) => {
               </div>
               <div className="mt-6 sm:mt-0 xl:my-10 xl:px-20 w-52 sm:w-96 xl:w-auto">
                 <Image
-                  src={urlFor(product?.image[0]).url()}
+                  // src={urlFor(product?.image[0])?.url()}
+                  src={
+                    "https://cdn.sanity.io/images/sho4tsku/production/a64b345016e96adfb8849af5521c8e0ecfe8f027-555x555.webp"
+                  }
                   width={500}
                   height={500}
                   alt="headphones"
@@ -43,7 +47,7 @@ const Checkout = ({ product, products }) => {
             <div className="flex flex-col p-8 bg-gray-100 rounded lg:w-full xl:w-3/5">
               <button className="flex flex-row items-center justify-center w-full py-4 space-x-2 text-white bg-gray-900 border border-transparent rounded-lg hover:border-gray-300 hover:bg-white hover:text-gray-900">
                 <div>
-                  {/* <svg
+                  <svg
                     className="fill-current"
                     width="16"
                     height="16"
@@ -59,7 +63,7 @@ const Checkout = ({ product, products }) => {
                       d="M10.6338 1C9.88379 1.05094 9.00879 1.52844 8.49629 2.15188C8.03129 2.71688 7.64879 3.555 7.79879 4.36781H7.85879C8.65754 4.36781 9.47504 3.88688 9.95254 3.27063C10.4125 2.68406 10.7613 1.85281 10.6338 1V1Z"
                       fill="currentColor"
                     />
-                  </svg> */}
+                  </svg>
                 </div>
                 <div>
                   <p className="text-base leading-4">Pay</p>
@@ -131,7 +135,7 @@ const Checkout = ({ product, products }) => {
                   >
                     {country}
                   </button>
-                  {/* <svg
+                  <svg
                     onClick={() => setMenu(!menu)}
                     className={
                       "transform  cursor-pointer absolute top-4 right-4 " +
@@ -149,7 +153,7 @@ const Checkout = ({ product, products }) => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
-                  </svg> */}
+                  </svg>
                   <div
                     className={
                       "mt-1 absolute z-10 w-full flex bg-gray-50 justify-start flex-col text-gray-600 " +
