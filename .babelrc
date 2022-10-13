@@ -1,10 +1,10 @@
 {
-    "presets": ["next/babel"],
+    "presets": ["next"],
     "plugins": []
   }
 
   // {
-  //   "presets": ["next"],
+  //   "presets": ["next","next/babel"],
   //   "plugins": []
   // }
 // {
