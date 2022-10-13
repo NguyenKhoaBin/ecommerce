@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import { toast } from "react-hot-toast";
-
+import React from "react";
 const Context = createContext();
 export const StateContext = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
