@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useStateContext } from "../../context/StateContext";
@@ -30,7 +31,12 @@ const Checkout = ({ product, products }) => {
                 </p>
               </div>
               <div className="mt-6 sm:mt-0 xl:my-10 xl:px-20 w-52 sm:w-96 xl:w-auto">
-                <img src={urlFor(product?.image[0])} alt="headphones" />
+                <Image
+                  src={urlFor(product?.image[0]).url()}
+                  width={500}
+                  height={500}
+                  alt="headphones"
+                ></Image>
               </div>
             </div>
 
