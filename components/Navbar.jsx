@@ -14,7 +14,7 @@ const Navbar = () => {
     <>
       <div
         className="flex items-center justify-between max-h-[70px] h-full w-full
-  p-5 cursor-pointer px-[50px] "
+  p-5 cursor-pointer lg:px-[50px] px-[40px] "
       >
         <Link href={"/"}>
           <h2

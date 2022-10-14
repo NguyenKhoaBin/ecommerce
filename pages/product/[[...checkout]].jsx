@@ -41,13 +41,14 @@ const Checkout = ({ product }) => {
                   height={500}
                   alt="headphones"
                 ></Image> */}
-                <Image
+                {/* <Image
                   src={urlFor(product.image[0]).url()}
                   // abc
                   width={500}
                   height={500}
                   alt="headphones"
-                ></Image>
+                ></Image> */}
+                <img src={urlFor(product.image[0])?.url()} alt="" />
               </div>
             </div>
 

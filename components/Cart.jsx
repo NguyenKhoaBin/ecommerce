@@ -53,7 +53,7 @@ const Cart = ({ setShowCart }) => {
         )}
       </div>
       {totalPrice > 0 && (
-        <div className="lg:w-[600px] px-10 absolute bottom-0 right-0 w-full z-[1000] bg-white py-5 space-y-3">
+        <div className="lg:w-[600px] px-10  bottom-[45px] md:bottom-0 fixed right-0 w-full z-[1000] bg-white py-5 space-y-3">
           <div className="flex items-center justify-between text-2xl font-bold text-black">
             <p>Subtotal</p>
             <span>${totalPrice}</span>

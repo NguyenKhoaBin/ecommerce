@@ -14,7 +14,7 @@ const ProductDetail = ({ products, product }) => {
   const handleClickBuyNow = (product) => {};
 
   return (
-    <div className="py-8 px-[75px]">
+    <div className="py-8 px-[40px] md:px-[75px]">
       <div className="flex flex-wrap">
         <div className="flex flex-col gap-5 w-full lg:w-[30%]">
           <div className="bg-[#DCDCDC] p-3 rounded-xl cursor-pointer hover:bg-orange-400 transition duration-500 ease-in-out flex items-center justify-center">
