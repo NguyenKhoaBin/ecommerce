@@ -52,7 +52,7 @@ const Checkout = ({ product }) => {
               </div>
             </div>
 
-            <div className="flex flex-col p-8 bg-gray-100 rounded lg:w-full xl:w-3/5">
+            <div className="flex flex-col px-4 py-8 bg-gray-100 rounded lg:py-8 lg:w-full xl:w-3/5">
               <button className="flex flex-row items-center justify-center w-full py-4 space-x-2 text-white bg-gray-900 border border-transparent rounded-lg hover:border-gray-300 hover:bg-white hover:text-gray-900">
                 <div>
                   <svg
