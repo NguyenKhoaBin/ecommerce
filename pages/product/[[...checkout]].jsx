@@ -202,32 +202,40 @@ const Checkout = ({ product }) => {
   );
 };
 
-export const getStaticPaths = async () => {
-  const query = `*[_type == "product"] {
-      slug {
-        current
-      }
-    }
-    `;
+// export const getStaticPaths = async () => {
+//   const query = `*[_type == "product"] {
+//       slug {
+//         current
+//       }
+//     }
+//     `;
 
-  const products = await client.fetch(query);
+//   const products = await client.fetch(query);
 
-  const paths = products.map((product) => ({
-    params: {
-      checkout: [product.slug.current, "checkout"],
-    },
-  }));
-  return {
-    paths,
-    fallback: "blocking",
-  };
-};
+//   const paths = products.map((product) => ({
+//     params: {
+//       checkout: [product.slug.current, "checkout"],
+//     },
+//   }));
+//   return {
+//     paths,
+//     fallback: "blocking",
+//   };
+// };
 
-export const getStaticProps = async ({ params: { checkout } }) => {
-  const query = `*[_type == "product" && name == '${checkout[0]}'][0]`;
+// export const getStaticProps = async ({ params: { checkout } }) => {
+//   const query = `*[_type == "product" && name == '${checkout[0]}'][0]`;
 
-  const product = await client.fetch(query);
+//   const product = await client.fetch(query);
 
+//   return {
+//     props: { product },
+//   };
+// };
+
+export const getServerSideProps = async ({ params: { checkout } }) => {
+  const queryProducts = `*[_type == "product" && name == '${checkout[0]}'][0]`;
+  const product = await client.fetch(queryProducts);
   return {
     props: { product },
   };
