@@ -1,4 +1,3 @@
-export { default as Header } from "./Header";
 export { default as HeaderBanner } from "./HeaderBanner";
 export { default as Footer } from "./Footer";
 export { default as FooterBanner } from "./FooterBanner";

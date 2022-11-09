@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { urlFor } from "../libs/client";
+
 const HeaderBanner = ({ bannerData }) => {
   return (
     <div className="bg-[#DCDCDC] rounded-2xl md:py-5 py-10 min-h-[500px] h-full relative z-50 ">

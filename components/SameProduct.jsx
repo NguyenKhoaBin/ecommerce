@@ -9,23 +9,6 @@ const SameProduct = ({ products }) => {
       <h2 className="text-center text-3xl text-textColor font-[700] my-10">
         You May Also Like
       </h2>
-      {/* <div className="flex gap-8">
-        <div className="w-[30%]">
-          <ProductItem></ProductItem>
-        </div>
-        <div className="w-[30%]">
-          <ProductItem></ProductItem>
-        </div>
-        <div className="w-[30%]">
-          <ProductItem></ProductItem>
-        </div>
-        <div className="w-[30%]">
-          <ProductItem></ProductItem>
-        </div>
-        <div className="w-[30%]">
-          <ProductItem></ProductItem>
-        </div>
-      </div> */}
       <Slider>
         {products?.map((item, index) => (
           <ProductItem

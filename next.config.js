@@ -6,5 +6,11 @@ const nextConfig = {
 
 // module.exports = nextConfig;
 module.exports = {
-  images: { domains: ["cdn-icons-png.flaticon.com", "cdn.sanity.io"] },
+  images: {
+    domains: [
+      "cdn-icons-png.flaticon.com",
+      "cdn.sanity.io",
+      "salt.tikicdn.com",
+    ],
+  },
 };

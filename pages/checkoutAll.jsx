@@ -1,27 +1,26 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import CartItem from "../components/CartItem";
-import { useStateContext } from "../context/StateContext";
+
+import { selectCart, selectTotalPrice, handleCheckOut } from "../app/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 const CheckoutAll = () => {
+  const dispatch = useDispatch();
   const countries = ["Việt Nam", "Russia", "UK"];
   const [menu, setMenu] = useState(false);
   const [country, setCountry] = useState("United States");
-  const {
-    cartItems,
-    totalPrice,
-    setCartItems,
-    setTotalPrice,
-    setTotalQuantities,
-  } = useStateContext();
+
+  const cartItems = useSelector(selectCart);
+  const totalPrice = useSelector(selectTotalPrice);
+  console.log(cartItems);
   const changeText = (e) => {
     setMenu(false);
     setCountry(e.target.textContent);
   };
   const handleCheckOutAll = () => {
-    setCartItems([]);
-    setTotalPrice(0);
-    setTotalQuantities(0);
+    dispatch(handleCheckOut());
+    console.log("check out");
   };
   return (
     <div className="flex flex-wrap px-8 ">

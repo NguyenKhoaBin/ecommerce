@@ -1,14 +1,22 @@
 import React from "react";
-import { useStateContext } from "../context/StateContext";
-import { urlFor } from "../libs/client";
 import CartItem from "./CartItem";
 import ArrowLeft from "./icon/ArrowLeft";
 import Link from "next/link";
+import {
+  selectCart,
+  selectTotalPrice,
+  selectTotalQty,
+} from "../app/cartSlice.js";
+import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
-import ShoppingBagIcon from "./icon/ShoppingBagIcon";
 
 const Cart = ({ setShowCart }) => {
-  const { cartItems, totalPrice, totalQuantities } = useStateContext();
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCart);
+  const totalPrice = useSelector(selectTotalPrice);
+  const totalQuantities = useSelector(selectTotalQty);
+
+  console.log(totalQuantities);
   return (
     <div className="fixed w-screen top-0 right-0 z-[100] transition-all ">
       <div
@@ -31,10 +39,19 @@ const Cart = ({ setShowCart }) => {
         </div>
         {totalQuantities == 0 && (
           <div className="flex flex-col items-center h-[85%] justify-between ">
-            <ShoppingBagIcon></ShoppingBagIcon>
+            <div className="pt-10 space-y-8">
+              <Image
+                src={"https://salt.tikicdn.com/desktop/img/mascot@2x.png"}
+                width={300}
+                height={400}
+              />
+              <p className="text-2xl text-[#3B3939] font-[700] text-center ">
+                Cart is empty, shop now
+              </p>
+            </div>
             <Link href={"/"}>
               <button
-                className=" my-5 block px-[75px] py-3  text-xl font-[500] text-white bg-[#E77236] rounded-lg hover:opacity-80"
+                className=" my-2 block px-[75px] py-3  text-xl font-[500] text-white bg-[#E77236] rounded-lg hover:opacity-80"
                 onClick={() => setShowCart(false)}
               >
                 SHOP NOW

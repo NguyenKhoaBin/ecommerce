@@ -1,15 +1,20 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import CartIcon from "../components/icon/CartIcon";
-import { useStateContext } from "../context/StateContext";
 import Cart from "./Cart";
+import { useSelector, useDispatch } from "react-redux";
+import { selectTotalQty, selectTotalPrice } from "../app/cartSlice";
 
 const Navbar = () => {
   const handleClickOpenCart = () => {
     setShowCart(!showCart);
   };
   const [showCart, setShowCart] = useState(false);
-  const { totalPrice, totalQuantities } = useStateContext();
+  // const { totalPrice, totalQuantities } = useStateContext();
+
+  const totalPrice = useSelector(selectTotalPrice);
+  const totalQuantities = useSelector(selectTotalQty);
+
   return (
     <>
       <div

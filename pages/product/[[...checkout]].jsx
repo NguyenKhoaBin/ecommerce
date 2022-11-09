@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { useStateContext } from "../../context/StateContext";
 import { client, urlFor } from "../../libs/client";
+import { selectQty } from "../../app/cartSlice";
+import { useSelector } from "react-redux";
 
 const Checkout = ({ product }) => {
   const countries = ["Việt Nam", "Russia", "UK"];
@@ -15,7 +16,7 @@ const Checkout = ({ product }) => {
     setCountry(e.target.textContent);
   };
 
-  const { qty } = useStateContext();
+  const qty = useSelector(selectQty);
 
   return (
     <div className="flex items-center justify-center px-10 ">
@@ -242,10 +243,3 @@ export const getServerSideProps = async ({ params: { checkout } }) => {
 };
 
 export default Checkout;
-// import React from "react";
-
-// const Checkout = () => {
-//   return <div>checkout</div>;
-// };
-
-// export default Checkout;

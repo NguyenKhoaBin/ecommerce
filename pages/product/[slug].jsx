@@ -5,13 +5,35 @@ import MinusIcon from "../../components/icon/MinusIcon";
 import PlusIcon from "../../components/icon/PlusIcon";
 import StarIcon from "../../components/icon/StarIcon";
 import SameProduct from "../../components/SameProduct";
-import { useStateContext } from "../../context/StateContext";
 import { client, urlFor } from "../../libs/client";
+import {
+  handleDecreQty,
+  handleIncreQty,
+  handleAddtoCart,
+  selectQty,
+} from "../../app/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 const ProductDetail = ({ products, product }) => {
   const [indexImage, setIndexImage] = useState(0);
-  const { qty, handleIncreQty, handleDecreQty, onAdd } = useStateContext();
   const handleClickBuyNow = (product) => {};
+
+  const dispatch = useDispatch();
+  const qty = useSelector(selectQty);
+
+  const handleAdd = () => {
+    dispatch(handleAddtoCart({ product, qty }));
+  };
+
+  const handleClickDcre = () => {
+    // handleDecreQty();
+    dispatch(handleDecreQty());
+  };
+
+  const handleClickIcre = () => {
+    // handleIncreQty();
+    dispatch(handleIncreQty());
+  };
 
   return (
     <div className="py-8 px-[40px] md:px-[75px]">
@@ -61,15 +83,16 @@ const ProductDetail = ({ products, product }) => {
           <div className="flex items-center justify-center gap-5 lg:justify-start">
             <p className="text-lg font-[700]">Quantity:</p>
             <div className="flex gap-3 border border-[#ccc] p-2">
-              <MinusIcon onClick={handleDecreQty} />
+              <MinusIcon onClick={handleClickDcre} />
               <span className="border-x border-x-[#ccc] px-3">{qty}</span>
-              <PlusIcon onClick={handleIncreQty} />
+              <PlusIcon onClick={handleClickIcre} />
             </div>
           </div>
           <div className="flex flex-col items-center gap-5 lg:gap-10 lg:flex-row ">
             <button
               className="px-8 py-3 text-xl font-[500] w-[180px] hover:scale-110 transition duration-300 ease-in-out  text-orange-500 border border-orange-500 rounded-sm"
-              onClick={() => onAdd(product, qty)}
+              // onClick={() => onAdd(product, qty)}
+              onClick={handleAdd}
             >
               Add to cart
             </button>
