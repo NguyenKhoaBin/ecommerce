@@ -11,6 +11,7 @@ module.exports = {
       "cdn-icons-png.flaticon.com",
       "cdn.sanity.io",
       "salt.tikicdn.com",
+      "lh3.googleusercontent.com",
     ],
   },
 };

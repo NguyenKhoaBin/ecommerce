@@ -1,5 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { async } from "@firebase/util";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { toast } from "react-hot-toast";
+import { db } from "../config/firebase";
+import { handleFetchData } from "../hooks/firebaseHook";
+
+export const getCart = createAsyncThunk("cart/fetchCart", async (result) => {
+  return result;
+});
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -45,6 +53,7 @@ export const cartSlice = createSlice({
         product.quantity = qty;
         state.cartItems = [...state.cartItems, { ...product }];
       }
+
       toast.success(`${qty} ${product.name} added to the cart.`);
     },
 
@@ -109,6 +118,37 @@ export const cartSlice = createSlice({
       state.quantity = 0;
       state.totalQuantities = 0;
     },
+    handleSetCart: (state, action) => {
+      {
+        const { cartItemsInDb, totalPriceInDb, totalQtyInDb } = action.payload;
+        state.cartItems = cartItemsInDb;
+        state.totalQuantities = totalQtyInDb;
+        state.totalPrice = totalPriceInDb;
+      }
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(getCart.rejected, (state, action) => {
+      console.log("failed...");
+    });
+    builder.addCase(getCart.fulfilled, (state, action) => {
+      console.log("fullfill");
+      console.log(action.payload.length);
+      if (action.payload.length > 0) {
+        action.payload.map((item) => {
+          if (item.cartItem.length <= 0) {
+            state.totalPrice = 0;
+            state.totalQuantities = 0;
+            state.cartItems = [];
+            console.log("df");
+          } else {
+            state.totalPrice = item.totalPrice;
+            state.totalQuantities = item.totalQty;
+            state.cartItems = item.cartItem;
+          }
+        });
+      }
+    });
   },
 });
 
@@ -120,6 +160,7 @@ export const {
   handleDeCreQtyItemInCart,
   handleDeleteItemInCart,
   handleCheckOut,
+  handleSetCart,
 } = cartSlice.actions;
 
 export const selectCart = (state) => state.cart.cartItems;

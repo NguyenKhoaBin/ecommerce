@@ -17,7 +17,7 @@ const HeaderBanner = ({ bannerData }) => {
           {bannerData.product}
         </h2>
         <Link href={`/product/${bannerData?.product}`}>
-          <button className="px-2 min-w-[220px] mx-auto lg:mx-0 py-3 mt-[200px] mb-[20px] lg:px-6 lg:py-3 bg-orange-600 rounded-lg text-lg font-[500] text-white  lg:my-[30px] hover:bg-opacity-[.8] outline-none  cursor-pointer block">
+          <button className="px-2 min-w-[220px]  mx-auto lg:mx-0 py-3 mt-[200px] mb-[20px] lg:px-6 lg:py-3 bg-orange-600 rounded-lg text-lg font-[500] text-white  lg:mt-[120px] hover:bg-opacity-[.8] outline-none  cursor-pointer block">
             {bannerData.buttonText}
           </button>
         </Link>

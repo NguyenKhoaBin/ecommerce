@@ -33,22 +33,6 @@ const Checkout = ({ product }) => {
                 </p>
               </div>
               <div className="mt-6 sm:mt-0 xl:my-10 xl:px-20 w-52 sm:w-96 xl:w-auto">
-                {/* <Image
-                  // src={urlFor(product?.image[0])?.url()}
-                  src={
-                    "https://cdn.sanity.io/images/sho4tsku/production/a64b345016e96adfb8849af5521c8e0ecfe8f027-555x555.webp"
-                  }
-                  width={500}
-                  height={500}
-                  alt="headphones"
-                ></Image> */}
-                {/* <Image
-                  src={urlFor(product.image[0]).url()}
-                  // abc
-                  width={500}
-                  height={500}
-                  alt="headphones"
-                ></Image> */}
                 <img src={urlFor(product.image[0])?.url()} alt="" />
               </div>
             </div>
@@ -202,38 +186,6 @@ const Checkout = ({ product }) => {
     </div>
   );
 };
-
-// export const getStaticPaths = async () => {
-//   const query = `*[_type == "product"] {
-//       slug {
-//         current
-//       }
-//     }
-//     `;
-
-//   const products = await client.fetch(query);
-
-//   const paths = products.map((product) => ({
-//     params: {
-//       checkout: [product.slug.current, "checkout"],
-//     },
-//   }));
-//   return {
-//     paths,
-//     fallback: "blocking",
-//   };
-// };
-
-// export const getStaticProps = async ({ params: { checkout } }) => {
-//   const query = `*[_type == "product" && name == '${checkout[0]}'][0]`;
-
-//   const product = await client.fetch(query);
-
-//   return {
-//     props: { product },
-//   };
-// };
-
 export const getServerSideProps = async ({ params: { checkout } }) => {
   const queryProducts = `*[_type == "product" && name == '${checkout[0]}'][0]`;
   const product = await client.fetch(queryProducts);

@@ -1,11 +1,21 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CartItem from "../components/CartItem";
 
-import { selectCart, selectTotalPrice, handleCheckOut } from "../app/cartSlice";
+import {
+  selectCart,
+  selectTotalPrice,
+  handleCheckOut,
+  selectTotalQty,
+} from "../app/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../config/firebase";
+import { handleUpdateCartItem } from "../hooks/firebaseHook";
 
 const CheckoutAll = () => {
+  const [loggedInUser] = useAuthState(auth);
+
   const dispatch = useDispatch();
   const countries = ["Việt Nam", "Russia", "UK"];
   const [menu, setMenu] = useState(false);
@@ -13,7 +23,8 @@ const CheckoutAll = () => {
 
   const cartItems = useSelector(selectCart);
   const totalPrice = useSelector(selectTotalPrice);
-  console.log(cartItems);
+  const totalQty = useSelector(selectTotalQty);
+
   const changeText = (e) => {
     setMenu(false);
     setCountry(e.target.textContent);
@@ -22,6 +33,15 @@ const CheckoutAll = () => {
     dispatch(handleCheckOut());
     console.log("check out");
   };
+  useEffect(() => {
+    if (loggedInUser)
+      handleUpdateCartItem(
+        loggedInUser?.email,
+        cartItems,
+        totalQty,
+        totalPrice
+      );
+  }, [totalQty, cartItems, totalPrice]);
   return (
     <div className="flex flex-wrap px-8 ">
       <div className="h-full md:w-[40%]  w-full lg:px-5 overflow-y-scroll">

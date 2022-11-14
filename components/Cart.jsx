@@ -9,14 +9,15 @@ import {
 } from "../app/cartSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
+import { cartRs } from "./Layout";
 
 const Cart = ({ setShowCart }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCart);
   const totalPrice = useSelector(selectTotalPrice);
   const totalQuantities = useSelector(selectTotalQty);
+  // console.log(cartRs.cartItem);
 
-  console.log(totalQuantities);
   return (
     <div className="fixed w-screen top-0 right-0 z-[100] transition-all ">
       <div

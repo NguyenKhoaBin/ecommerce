@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MinusIcon from "../../components/icon/MinusIcon";
 import PlusIcon from "../../components/icon/PlusIcon";
 import StarIcon from "../../components/icon/StarIcon";
@@ -11,27 +11,37 @@ import {
   handleIncreQty,
   handleAddtoCart,
   selectQty,
+  selectCart,
+  selectTotalQty,
+  selectTotalPrice,
 } from "../../app/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { handleUpdateCartItem, setCartInDb } from "../../hooks/firebaseHook";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../config/firebase";
 
 const ProductDetail = ({ products, product }) => {
+  const [loggedInUser] = useAuthState(auth);
   const [indexImage, setIndexImage] = useState(0);
-  const handleClickBuyNow = (product) => {};
-
   const dispatch = useDispatch();
   const qty = useSelector(selectQty);
+  const cartItem = useSelector(selectCart);
+  const totalQty = useSelector(selectTotalQty);
+  const totalPrice = useSelector(selectTotalPrice);
 
-  const handleAdd = () => {
-    dispatch(handleAddtoCart({ product, qty }));
+  const handleAdd = async () => {
+    await dispatch(handleAddtoCart({ product, qty }));
+    // setCartInDb(cartItem, totalPrice, totalQty, loggedInUser?.email);
   };
+  useEffect(() => {
+    if (loggedInUser)
+      handleUpdateCartItem(loggedInUser?.email, cartItem, totalQty, totalPrice);
+  }, [totalQty]);
 
   const handleClickDcre = () => {
-    // handleDecreQty();
     dispatch(handleDecreQty());
   };
-
   const handleClickIcre = () => {
-    // handleIncreQty();
     dispatch(handleIncreQty());
   };
 
@@ -97,10 +107,7 @@ const ProductDetail = ({ products, product }) => {
               Add to cart
             </button>
             <Link href={`/product/${product.name}/checkout`}>
-              <button
-                className="px-8 py-3 text-xl hover:scale-110 transition duration-300 ease-in-out font-[500]  w-[180px]  text-white bg-red-600 outline-none rounded-sm"
-                onClick={handleClickBuyNow(product)}
-              >
+              <button className="px-8 py-3 text-xl hover:scale-110 transition duration-300 ease-in-out font-[500]  w-[180px]  text-white bg-red-600 outline-none rounded-sm">
                 Buy now
               </button>
             </Link>

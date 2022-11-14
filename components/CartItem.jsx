@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { urlFor } from "../libs/client";
 import MinusIcon from "./icon/MinusIcon";
@@ -9,14 +9,25 @@ import {
   handleInCreQtyItemInCart,
   handleDeCreQtyItemInCart,
   handleDeleteItemInCart,
+  selectCart,
+  selectTotalPrice,
+  selectTotalQty,
 } from "../app/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { handleUpdateCartItem, setCartInDb } from "../hooks/firebaseHook";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../config/firebase";
 
 const CartItem = ({ product }) => {
+  const [loggedInUser] = useAuthState(auth);
   const dispatch = useDispatch();
+  const cartItem = useSelector(selectCart);
+  const totalQty = useSelector(selectTotalQty);
+  const totalPrice = useSelector(selectTotalPrice);
 
   const inCreQtyItemInCart = () => {
     dispatch(handleInCreQtyItemInCart({ product }));
+    // setCartInDb(cartItem, totalPrice, totalQty, loggedInUser?.email);
   };
 
   const deCreQtyItemInCart = () => {
@@ -25,9 +36,11 @@ const CartItem = ({ product }) => {
 
   const deleteItemInCart = () => {
     dispatch(handleDeleteItemInCart({ product }));
-
-    console.log("remove");
   };
+  useEffect(() => {
+    if (loggedInUser)
+      handleUpdateCartItem(loggedInUser?.email, cartItem, totalQty, totalPrice);
+  }, [totalQty, cartItem, totalPrice]);
 
   return (
     <div className="flex items-center w-full gap-5 my-5 rounded-lg hover:bg-black hover:bg-opacity-5">
