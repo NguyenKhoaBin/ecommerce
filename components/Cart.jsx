@@ -71,14 +71,14 @@ const Cart = ({ setShowCart }) => {
         )}
       </div>
       {totalPrice > 0 && (
-        <div className="lg:w-[600px] px-10  bottom-[45px] md:bottom-0 fixed right-0 w-full z-[1000] bg-white py-5 space-y-3">
+        <div className="lg:w-[600px] px-10  bottom-[55px] md:bottom-0 fixed right-0 w-full z-[1000] bg-white py-5 space-y-3">
           <div className="flex items-center justify-between text-2xl font-bold text-black">
             <p>Subtotal</p>
             <span>${totalPrice}</span>
           </div>
           <Link href={"/checkoutAll"}>
             <button
-              className="block px-[75px] py-3 mx-auto text-xl font-[500] text-white bg-red-600 rounded-lg hover:opacity-80"
+              className="block px-[75px] py-3 mx-auto text-xl font-[500] text-white bg-red-600 rounded-lg hover:opacity-80 "
               onClick={() => setShowCart(false)}
             >
               PAY WITH STRIPE

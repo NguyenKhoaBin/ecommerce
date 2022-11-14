@@ -18,7 +18,7 @@ const signin = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#eeeeee] flex items-center justify-center ">
+    <div className="min-h-[calc(100vh-75px)] bg-[#eeeeee] flex items-center justify-center ">
       <div className="bg-white h-[600px] md:w-[500px] w-[80vw] shadow-lg flex flex-col items-center justify-center gap-10">
         <FaGofore className="h-[100px] w-[100px] text-cyan-600" />
         <button

@@ -15,10 +15,11 @@ import {
   where,
 } from "firebase/firestore";
 import { setCartInDb } from "../hooks/firebaseHook";
+import { useState } from "react";
 
 function MyApp({ Component, pageProps }) {
   const [loggedInUser] = useAuthState(auth);
-  let newUser = false;
+  const [newUser, setNewUser] = useState(false);
   useEffect(() => {
     console.log("re-render");
     const setUser = async () => {
@@ -45,8 +46,10 @@ function MyApp({ Component, pageProps }) {
       await onSnapshot(q, (querySnapshot) => {
         querySnapshot.forEach((doc) => {
           result.push({ id: doc.id, ...doc.data() });
-          result.length <= 0 ? (newUser = true) : (newUser = false);
         });
+        if (result.length == 0) {
+          setNewUser(true);
+        }
       });
     }
 
@@ -68,6 +71,7 @@ function MyApp({ Component, pageProps }) {
       setUser();
       if (newUser) {
         setCart();
+        console.log("setcart");
       }
     }
   }, [loggedInUser]);
